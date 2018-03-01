@@ -6,14 +6,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
-    MediaPlayer mep;
+    MediaPlayer mep = new MediaPlayer();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mep = MediaPlayer.create(this,R.raw.batuk);
+        try {
+            mep.setDataSource("/mnt/sdcard/batuk.mp3");
+            mep.prepare();
 
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Button btnPlay = findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
